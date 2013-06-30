@@ -1,0 +1,6 @@
+development:
+  sessions:
+    default:
+      database: loopsong
+      hosts:
+        - localhost:27017

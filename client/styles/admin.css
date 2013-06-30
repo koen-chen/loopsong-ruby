@@ -1,0 +1,30 @@
+.editAlbumList,.editAccountList{margin-top:50px;}
+.editAlbumList em,.editAccountList em{font:14px Arial,Helvetica,sans-serif;color:#111;padding:10px 0}
+.editAlbumList em:before,.editAccountList em:before{display:inline;content:'|';padding-right:1px;margin-right:5px;color:#f47723;background:#f47723}
+.editAlbumList .operateWrap,.editAccountList .operateWrap{position:absolute;right:0;top:-20px;}
+.editAlbumList .operateWrap .editBtn,.editAccountList .operateWrap .editBtn,.editAlbumList .operateWrap .deleteBtn,.editAccountList .operateWrap .deleteBtn{display:block;width:20px;height:20px;text-indent:-9999px;float:left;margin-left:1px;background:#f47723 url("../images/edit_btn.png") no-repeat center center}
+.editAlbumList .operateWrap .deleteBtn,.editAccountList .operateWrap .deleteBtn{background:#f47723 url("../images/trash_btn.png") no-repeat center center}
+.albumForm,.userForm{width:800px;margin:30px auto;}
+.albumForm h3,.userForm h3{font:16px Arial,Helvetica,sans-serif;color:#111;padding:10px 0}
+.albumForm h3:before,.userForm h3:before{display:inline;content:'|';padding-right:1px;margin-right:5px;color:#f47723;background:#f47723}
+.albumForm .inputRow,.userForm .inputRow{margin:10px 0;overflow:hidden}
+.albumForm label,.userForm label{display:block;width:100px;font-size:14px;line-height:2em;float:left;margin-right:20px}
+.albumForm input[type="text"],.userForm input[type="text"],.albumForm input[type="password"],.userForm input[type="password"],.albumForm input[type="url"],.userForm input[type="url"],.albumForm textarea,.userForm textarea{box-sizing:border-box;float:left;width:600px;padding:4px}
+.albumForm .typeRow input[type="text"],.userForm .typeRow input[type="text"],.albumForm .typeRow input[type="password"],.userForm .typeRow input[type="password"]{width:200px;float:none;padding:0;margin:10px 0 0 10px}
+.albumForm .typeRow input[type='radio'],.userForm .typeRow input[type='radio']{position:relative;top:2px;margin:5px 5px 0 10px}
+.albumForm textarea,.userForm textarea{height:200px}
+.albumForm .step2,.userForm .step2,.albumForm .step3,.userForm .step3{display:none}
+.albumForm .nextBtn,.userForm .nextBtn,.albumForm .submitBtn,.userForm .submitBtn{float:left;margin:30px 0;width:88px;height:34px;border:none;background:url("../images/button_bg.png") repeat 0 0;}
+.albumForm .nextBtn:hover,.userForm .nextBtn:hover,.albumForm .submitBtn:hover,.userForm .submitBtn:hover{color:#f47723}
+.albumForm .backBtn,.userForm .backBtn{display:none;margin:30px;float:left;width:88px;height:34px;background:transparent;color:#f47723;}
+.albumForm .backBtn:hover,.userForm .backBtn:hover{text-decoration:underline}
+.albumForm .submitBtn,.userForm .submitBtn{display:none}
+.albumForm #coverWrap,.userForm #coverWrap,.albumForm #previewWrap,.userForm #previewWrap{width:360px;height:360px;float:left;margin-right:10px;}
+.albumForm #coverWrap h3,.userForm #coverWrap h3,.albumForm #previewWrap h3,.userForm #previewWrap h3{margin:5px}
+.albumForm #coverWrap .wrap,.userForm #coverWrap .wrap,.albumForm #previewWrap .wrap,.userForm #previewWrap .wrap{width:300px;height:300px;float:left;background:#fff;overflow:hidden}
+.accountList li{box-sizing:border-box;position:relative;padding:5px;width:200px;margin:18px;float:left;background:#fff}
+.userForm .submitBtn{display:block}
+.addItemNav{display:block;margin:30px 0;width:100%;height:20px;line-height:20px;background:url("../images/add_icon.png") no-repeat 0 center;text-indent:20px}
+.backBtn{padding-bottom:3px;}
+.backBtn:hover{border-bottom:1px dotted #333}
+.parsley-error-list{clear:both;box-sizing:border-box;width:600px;padding:4px;margin-left:120px;background:#f47723;color:#fff}

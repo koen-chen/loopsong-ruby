@@ -1,0 +1,21 @@
+<a href="/user/<%= @account[:_id] %>" class="backBtn">&#171; 返回管理界面</a>
+
+<a href="/user/new" class="addItemNav">添加新用户</a>
+
+<div class="editAccountList">
+    <em>现有用户</em>
+    <ul class="accountList">
+    <% @users.each do |account| %>
+        <li class="userItem" userId="<%= account[:_id] %>">
+            <h2 class="title">
+               <%= account[:username] %>
+            </h2>
+
+            <div class="operateWrap">
+                <a class="editBtn" href="/user/<%= account[:_id] %>/edit" title="修改" >修改</a>
+                <a class="deleteBtn" href="/user/<%= account[:_id] %>/delete" title="删除">删除</a>
+            </div>
+        </li>
+    <% end %>   
+    </ul>
+</div>
