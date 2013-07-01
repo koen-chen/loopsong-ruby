@@ -5,7 +5,7 @@ end
 post '/login' do
     user = User.where(username: params[:username], password: params[:password]).first
     if user.nil?
-        @message = '邮箱或密码错误！'
+        flash[:notice] = '邮箱或密码错误！'
         @user = params
         erb :'user/login'
     else
@@ -34,44 +34,59 @@ post '/user/new' do
     user = User.create(
         username: params[:username],
         password: params[:password],
-        role: 'general'
+        role: 'general',
+        create_at: Time.now,
+        update_at: Time.now
     ) 
-    puts 'ddddd'
-    puts user
     if user.nil? 
-        @message = '添加新用户失败，请重试！'
+        flash[:notice] = '添加新用户失败！'
         @user = params
         erb :'user/new', :layout => :adminLayout
     else
-        redirect to('/user/all')
+        flash[:notice] = '添加新用户成功！'
+        redirect '/user/all'
     end
 end
 
 get '/user/:id' do
     @loginUser = session[:loginUser]
-    erb :'user/index', :layout => :adminLayout
+    if params[:id].eql?(@loginUser[:_id].to_s)
+        erb :'user/index', :layout => :adminLayout
+    else
+        redirect '/user/' + @loginUser[:_id]
+    end
 end
 
 get '/user/:id/edit' do
     @user = User.find(params[:id])
-
-    erb :'user/edit', :layout => :adminLayout
+    if @user.nil?
+        redirect '/user/all'
+    else
+        erb :'user/edit', :layout => :adminLayout
+    end
+    
 end
 
 put '/user/:id/edit' do
-    user = User.new(
+    status = User.find(params[:id]).update_attributes(
         username: params[:username],
-        password: params[:password]
+        password: params[:password],
+        update_at: Time.now
     ) 
-    user.save
-    puts 'update _______________!!!!!!!!!!'
-    puts user
-    erb :'user/edit', :layout => :adminLayout
+    if status
+        flash[:notice] = '修改用户成功'
+        redirect '/user/all'
+    else
+        flash[:notice] = '修改用户失败'
+        @user = params
+        erb :'user/edit', :layout => :adminLayout
+    end
+    
 end
 
 get '/user/:id/delete' do
-    user = User.delete_all(_id: params[:id])
-    puts 'ddeeeeeeee'
-    puts user
-    redirect to('/user/all') 
+    status = User.find(params[:id]).delete
+    flash[:notice] = status ? '删除用户成功' : '删除用户失败'
+    redirect '/user/all'  
 end
+

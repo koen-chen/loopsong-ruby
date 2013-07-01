@@ -1,5 +1,9 @@
 <a href="/user/<%= @loginUser[:_id] %>" class="backBtn">&#171; 返回管理界面</a>
 
+<% if flash[:notice] %>
+<div class="tips"><%= flash[:notice] %></div>
+<% end %>
+
 <a href="/user/new" class="addItemNav">添加新用户</a>
 
 <div class="editAccountList">
