@@ -14,8 +14,7 @@ post '/login' do
 end
 
 get '/logout' do
-    session[:auth] = false
-    session[:account] = nil
+    session.clear
     redirect to('/')
 end 
 
