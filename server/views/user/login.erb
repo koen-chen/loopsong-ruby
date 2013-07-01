@@ -3,12 +3,12 @@
 
 	<div class="inputRow">
 		<label class="userName" for="user_name">账号</label>
-		<input type="text" name="username" placeholder="账号" id="user_name"  />
+		<input type="text" name="username" placeholder="账号" id="user_name"  value="<%= @user && @user[:username] %>" />
 	</div>
 
 	<div class="inputRow">
 		<label class="userPassword" for="user_password">密码</label>
-		<input type="password" name="password" placeholder="密码" id="user_password"  />
+		<input type="password" name="password" placeholder="密码" id="user_password"  value="<%= @user && @user[:password] %>"/>
 	</div>
 
 	<div class="rememberRow">

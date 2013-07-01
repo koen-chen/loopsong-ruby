@@ -7,7 +7,7 @@
     <span class="navBox"></span>
 </div>
 <ul class="albumList">
-    <% @albums.each do |albums| %>
+    <% @albums && @albums.each do |albums| %>
         <li class="albumItem" albumId="<%= album[:_id] %>">
             <span class="sleeve"></span>
             <a href="/albums/<%= album[:_id] %>" class="cover">

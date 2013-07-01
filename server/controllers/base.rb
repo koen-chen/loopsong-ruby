@@ -1,6 +1,4 @@
 get '/' do
-    @auth = !!session[:auth] 
-    @account = session[:account]
-    @albums = []
+    @loginUser = session[:loginUser]
     erb :'base/index'
 end

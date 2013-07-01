@@ -5,10 +5,11 @@ end
 post '/login' do
     user = User.where(username: params[:username], password: params[:password]).first
     if user.nil?
+        @message = '邮箱或密码错误！'
+        @user = params
         erb :'user/login'
     else
-        session[:auth] = true
-        session[:account] = user
+        session[:loginUser] = user
         redirect to('/')
     end
 end
@@ -18,49 +19,59 @@ get '/logout' do
     redirect to('/')
 end 
 
-get '/user' do
-    @account = session[:account]
+get '/user/all' do
+    @loginUser = session[:loginUser]
     @users = User.where(role: 'general')
 
-    erb :'user/index', :layout => :adminLayout
-end
-
-post '/user' do
-    User.create(
-        username: params[:username],
-        password: params[:password],
-        role: 'general'
-    ) do |user|
-        puts user
-    end
+    erb :'user/all', :layout => :adminLayout
 end
 
 get '/user/new' do
     erb :'user/new', :layout => :adminLayout
 end
 
-get '/user/:id' do
-    @account = session[:account]
-    erb :'user/show', :layout => :adminLayout
+post '/user/new' do
+    user = User.create(
+        username: params[:username],
+        password: params[:password],
+        role: 'general'
+    ) 
+    puts 'ddddd'
+    puts user
+    if user.nil? 
+        @message = '添加新用户失败，请重试！'
+        @user = params
+        erb :'user/new', :layout => :adminLayout
+    else
+        redirect to('/user/all')
+    end
 end
 
-put '/user/:id' do
-    User.update_attributes(
-        username: params[:username],
-        password: params[:password]
-
-    )
-    erb :'user/edit', :layout => :adminLayout
+get '/user/:id' do
+    @loginUser = session[:loginUser]
+    erb :'user/index', :layout => :adminLayout
 end
 
 get '/user/:id/edit' do
-    @account = User.find(params[:id])
+    @user = User.find(params[:id])
 
+    erb :'user/edit', :layout => :adminLayout
+end
+
+put '/user/:id/edit' do
+    user = User.new(
+        username: params[:username],
+        password: params[:password]
+    ) 
+    user.save
+    puts 'update _______________!!!!!!!!!!'
+    puts user
     erb :'user/edit', :layout => :adminLayout
 end
 
 get '/user/:id/delete' do
-    Person.delete_all(_id: params[:id])
-    
-    redirect to('/user') 
+    user = User.delete_all(_id: params[:id])
+    puts 'ddeeeeeeee'
+    puts user
+    redirect to('/user/all') 
 end
