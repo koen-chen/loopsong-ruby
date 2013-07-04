@@ -12,16 +12,8 @@
 .albumForm input[type="text"],.userForm input[type="text"],.albumForm input[type="password"],.userForm input[type="password"],.albumForm input[type="url"],.userForm input[type="url"],.albumForm textarea,.userForm textarea{box-sizing:border-box;float:left;width:600px;padding:4px}
 .albumForm .typeRow input[type="text"],.userForm .typeRow input[type="text"],.albumForm .typeRow input[type="password"],.userForm .typeRow input[type="password"]{width:200px;float:none;padding:0;margin:10px 0 0 10px}
 .albumForm .typeRow input[type='radio'],.userForm .typeRow input[type='radio']{position:relative;top:2px;margin:5px 5px 0 10px}
-.albumForm textarea,.userForm textarea{height:200px}
-.albumForm .step2,.userForm .step2,.albumForm .step3,.userForm .step3{display:none}
-.albumForm .nextBtn,.userForm .nextBtn,.albumForm .submitBtn,.userForm .submitBtn{float:left;margin:30px 0;width:88px;height:34px;border:none;background:url("../images/button_bg.png") repeat 0 0;}
-.albumForm .nextBtn:hover,.userForm .nextBtn:hover,.albumForm .submitBtn:hover,.userForm .submitBtn:hover{color:#f47723}
-.albumForm .backBtn,.userForm .backBtn{display:none;margin:30px;float:left;width:88px;height:34px;background:transparent;color:#f47723;}
-.albumForm .backBtn:hover,.userForm .backBtn:hover{text-decoration:underline}
-.albumForm .submitBtn,.userForm .submitBtn{display:none}
-.albumForm #coverWrap,.userForm #coverWrap,.albumForm #previewWrap,.userForm #previewWrap{width:360px;height:360px;float:left;margin-right:10px;}
-.albumForm #coverWrap h3,.userForm #coverWrap h3,.albumForm #previewWrap h3,.userForm #previewWrap h3{margin:5px}
-.albumForm #coverWrap .wrap,.userForm #coverWrap .wrap,.albumForm #previewWrap .wrap,.userForm #previewWrap .wrap{width:300px;height:300px;float:left;background:#fff;overflow:hidden}
+.albumForm .submitBtn,.userForm .submitBtn{float:left;margin:30px 0;width:88px;height:34px;border:none;background:url("../images/button_bg.png") repeat 0 0;}
+.albumForm .submitBtn:hover,.userForm .submitBtn:hover{color:#f47723}
 .accountList li{box-sizing:border-box;position:relative;padding:5px;width:200px;margin:18px;float:left;background:#fff}
 .userForm .submitBtn{display:block}
 .addItemNav{display:block;margin:30px 0;width:100%;height:20px;line-height:20px;background:url("../images/add_icon.png") no-repeat 0 center;text-indent:20px}

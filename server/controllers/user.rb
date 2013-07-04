@@ -81,7 +81,6 @@ put '/user/:id/edit' do
         @user = params
         erb :'user/edit', :layout => :adminLayout
     end
-    
 end
 
 get '/user/:id/delete' do
