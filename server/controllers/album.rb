@@ -1,6 +1,8 @@
 require 'net/http'
 require 'nokogiri'
 require 'open-uri'
+require 'json'
+require 'pathname'
 
 get '/album/all' do
     @loginUser = session[:loginUser]
@@ -72,21 +74,21 @@ end
 def resolveAlbumInfo(xiamiLink, page) 
     doc = Nokogiri::HTML(page)
 
-    album = {};
-    album[:cover] = doc.at_css('#albumCover').href;
-    album[:title] = doc.at_css('#title h1').to_html.gsub(/<span>.*<\/span>/, '');
-    album[:detail] = doc.at_css('#album_intro .album_intro_brief').text;
+    album = {}
+    album[:cover] = doc.at_css('#albumCover').href
+    album[:title] = doc.at_css('#title h1').to_html.gsub(/<span>.*<\/span>/, '')
+    album[:detail] = doc.at_css('#album_intro .album_intro_brief').text
     
     doc.css('#album_info table td.item').each do |item|
-        itemValue = item.next_element.next_element.text.strip;
-        itemName = item.text.scan(/([\u4e00-\u9fa5]+)/g)[0];
+        itemValue = item.next_element.next_element.text.strip
+        itemName = item.text.scan(/([\u4e00-\u9fa5]+)/)[0]
         case itemName 
         when '艺人' 
             album[:author] = itemValue
         when '唱片公司' 
             album[:company] = itemValue
         when '发行时间' 
-            album[:published] = itemValue;
+            album[:published] = itemValue
         end
     end
 
@@ -95,17 +97,33 @@ def resolveAlbumInfo(xiamiLink, page)
     album[:trackList] = []
 
     doc('#track .song_name a').each do |item|
-        album[:trackList].push(item.text);
+        album[:trackList].push(item.text)
     end
 end
 
-def getDoubanLink 
+def getDoubanLink(album) 
+    uri = URI('https://api.douban.com/v2/music/search?q=' + album.title + ' ' + album.author)
+    response = Net::HTTP.start(uri.host, uri.port, :use_ssl => true) do |http|
+        http.request(req)
+    end
+    album[:doubanLink] = JSON.parse(response.body)['musics'][0]
 end
 
-def getKuwoLink
+def getKuwoLink(album)
+    uri = URI('http://sou.kuwo.cn/ws/NSearch?key=' + album.title + ' ' + album.author)
+    response = Net::HTTP.get_response(uri)
+    doc = Nokogiri::HTML(response.body)
+    album[:kuwoLink] = doc.at_css('.albumFrm a.clr').href
 end
 
-def getAlbumCover 
+def getAlbumCover(dir, album) 
+    open(album.cover) do |f|
+        coverName = File.basename(album.cover);
+        File.open(dir + '/images/cover/xiami_'+ coverName, 'wb') do |file|
+            file.puts f.read
+            album[:cover] = '/cover/xiami_' + coverName;
+        end
+    end
 end
 
 def saveAlbum
